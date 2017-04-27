@@ -32,28 +32,66 @@
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
+    const filter = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600));
+
+    console.table(filter)
+
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+
+    const firstLastName = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+
+    console.log(firstLastName)
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
+    const sorted = inventors.sort((a, b) => (a.year >= b.year) ? 1 : -1);
+
+    console.table(sorted)
+
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
 
+    const totalYears = inventors.reduce((t, i) => t + i.passed - i.year, 0);
+
+    console.log(totalYears)
+
     // 5. Sort the inventors by years lived
+
+    const sortedByAge = inventors.sort((a, b) => (a.passed - a.year >= b.passed - b.year) ? 1 : -1);
+
+    console.table(sortedByAge)
+
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
+    let links = Array.from(document.querySelectorAll('.mw-category a'));
+    let names = links.map(link => link.text)
+                     .filter(name=> name.includes('de '));
+
+    console.log(names)
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+
+    const sortedByLastName = people.sort((a, b) => a.split(', ')[1].toUpperCase() >= b.split(', ')[1].toUpperCase() ? 1 : -1)
+
+    console.log(sortedByLastName)
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
+    const table = data.reduce((t, i) => {
+      if(t[i]) t[i]++;
+      else t[i] = 1;
+      return t;
+    }, {})
+
+    console.log(table);
+    
   </script>
 </body>
 </html>

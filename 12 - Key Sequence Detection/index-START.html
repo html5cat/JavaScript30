@@ -6,7 +6,24 @@
   <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
 </head>
 <body>
+
 <script>
+
+const lastSix = [];
+const combo = ['ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'a', 'b', ]
+
+window.addEventListener('keyup', e => {
+  lastSix.push(e.key);
+  if(lastSix.length >= 7) {
+    lastSix.shift();
+  }
+  console.log(e.key, lastSix);
+  if (JSON.stringify(lastSix) == JSON.stringify(combo)) {
+    cornify_add();
+  }
+})
+
+
 </script>
 </body>
 </html>

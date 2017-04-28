@@ -19,27 +19,68 @@
 
     // Regular
 
+    console.log('test');
+
     // Interpolated
+
+    console.log('test %s', ' hi');
 
     // Styled
 
+    console.log('%c test', 'font-size:16px')
+
     // warning!
+
+    console.warn('warning sign')
 
     // Error :|
 
+    console.error('error!')
+
     // Info
 
+    console.info('info mark')
+
     // Testing
+    const p = document.querySelector('p')
+
+    console.assert(1 ===2, 'nope')
 
     // clearing
 
+    // console.clear()
+
     // Viewing DOM Elements
+
+    console.log(p)
+    console.dir(p)
 
     // Grouping together
 
+    dogs.forEach(dog => {
+      console.groupCollapsed(dog.name)
+      console.log(dog.name)
+      console.log(dog.age)
+      console.groupEnd(dog.name)
+    })
+
     // counting
 
+    console.count('Count')
+    console.count('Count')
+    console.count('Count')
+    console.count('Count')
+    console.count('Count')
+
     // timing
+
+    console.time('fetching')
+    fetch('https://api.github.com/users/html5cat')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching');
+        console.log(data);
+      })
 
   </script>
 </body>

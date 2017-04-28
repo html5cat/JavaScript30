@@ -34,7 +34,7 @@
     .then(data => cities.push(...data))
 
 
-  function locationCompare(a, b, point = currentLocation) {
+  function compareDistance(a, b, point = currentLocation) {
     if(Math.pow(a.latitude - point.latitude, 2) + Math.pow(a.longitude - point.longitude, 2) >= Math.pow(b.latitude - point.latitude, 2) + Math.pow(b.longitude - point.longitude, 2)) {
       return 1;
     } else {
@@ -44,7 +44,9 @@
 
   function filterMatches(query, list) {
     const regex = new RegExp(query, 'gi');
-    return list.filter(el => el.city.match(regex)||el.state.match(regex)).sort((a, b) => locationCompare(a, b));
+    return list
+            .filter(el => el.city.match(regex)||el.state.match(regex))
+            .sort((a, b) => compareDistance(a, b));
   }
 
   function renderMatches() {

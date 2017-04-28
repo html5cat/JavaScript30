@@ -18,14 +18,33 @@
   const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
   const cities = [];
+  let currentLocation = {latitude: 37.7653994, longitude: -122.4278163};
+
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      currentLocation = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      }
+    });
+  }
 
   fetch(endpoint)
     .then(blob => blob.json())
     .then(data => cities.push(...data))
 
+
+  function locationCompare(a, b, point = currentLocation) {
+    if(Math.pow(a.latitude - point.latitude, 2) + Math.pow(a.longitude - point.longitude, 2) >= Math.pow(b.latitude - point.latitude, 2) + Math.pow(b.longitude - point.longitude, 2)) {
+      return 1;
+    } else {
+      return -1;
+    }
+  }
+
   function filterMatches(query, list) {
     const regex = new RegExp(query, 'gi');
-    return list.filter(el => el.city.match(regex)||el.state.match(regex))
+    return list.filter(el => el.city.match(regex)||el.state.match(regex)).sort((a, b) => locationCompare(a, b));
   }
 
   function renderMatches() {

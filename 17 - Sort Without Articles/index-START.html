@@ -46,6 +46,31 @@
 <script>
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
+const articles = ['the ', 'a ', 'an '];
+
+function compareWithoutArticles(a, b) {
+  a = a.toLowerCase();
+  b = b.toLowerCase();
+  articles.forEach(el => {
+    if(a.startsWith(el)) {
+       a = a.substring(el.length);
+    }
+    if(b.startsWith(el)) {
+       b = b.substring(el.length);
+    }
+  })
+
+  if(a >= b) {
+    return 1
+  } else {
+    return -1
+  }
+}
+
+bands.sort(compareWithoutArticles);
+
+let html = bands.map(el => `<li>${el}</li>`).join('\n');
+document.querySelector('#bands').innerHTML = html;
 
 </script>
 

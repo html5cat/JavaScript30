@@ -22,6 +22,7 @@
     <form class="add-items">
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
+      <input type="button" name="clear" value="Clear List">
     </form>
   </div>
 
@@ -60,11 +61,18 @@
 
     const i = e.target.dataset.index;
     items[i].done = !items[i].done;
-    localStorage.setItem('items', JSON.stringify(items));    
+    localStorage.setItem('items', JSON.stringify(items));
+  }
+
+  function handleClear(e) {
+    localStorage.removeItem('items');
+    items.length = 0;
+    renderList(items, itemsList);
   }
 
   addItems.addEventListener('submit', addItem);
   itemsList.addEventListener('click', toggleDone);
+  document.querySelector('.add-items input[name=clear]').addEventListener('click', handleClear);
 
   renderList(items, itemsList);
 

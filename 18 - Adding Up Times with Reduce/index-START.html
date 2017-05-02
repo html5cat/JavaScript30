@@ -182,6 +182,18 @@
     </li>
   </ul>
 <script>
+
+const videos = document.querySelectorAll('[data-time]');
+
+const totalTime = Array.from(videos).reduce((total, el) => {
+  const time = el.dataset.time;
+  const [min, sec] = time.split(':').map(parseFloat);
+
+  return total + min * 60 + sec;
+}, 0)
+
+console.log(totalTime);
+
 </script>
 </body>
 </html>

@@ -185,14 +185,19 @@
 
 const videos = document.querySelectorAll('[data-time]');
 
-const totalTime = Array.from(videos).reduce((total, el) => {
+let totalSeconds = Array.from(videos).reduce((total, el) => {
   const time = el.dataset.time;
   const [min, sec] = time.split(':').map(parseFloat);
 
   return total + min * 60 + sec;
 }, 0)
 
-console.log(totalTime);
+const totalHours = Math.floor(totalSeconds / 3600);
+totalSeconds = totalSeconds % 3600;
+const totalMinutes = Math.floor(totalSeconds / 60);
+totalSeconds = totalSeconds % 60;
+
+console.log(`${totalHours}h ${totalMinutes}m ${totalSeconds}s`);
 
 </script>
 </body>

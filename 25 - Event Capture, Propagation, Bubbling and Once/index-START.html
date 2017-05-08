@@ -9,9 +9,11 @@
   <div class="one">
     <div class="two">
       <div class="three">
+        <button class="button">Test!</button>
       </div>
     </div>
   </div>
+
 
 <style>
   html {
@@ -39,6 +41,23 @@
 
 <button></button>
 <script>
+
+const divs = document.querySelectorAll('div');
+const button = document.querySelector('button');
+
+function handleClick(e) {
+  console.log(this.classList);
+  // e.stopPropagation();
+}
+
+divs.forEach(div => div.addEventListener('click', handleClick, {
+  capture: false,
+  once: true
+}))
+
+button.addEventListener('click', () => {
+  console.log('Click!');
+}, {once:true})
 
 </script>
 </body>

@@ -32,6 +32,17 @@ speed.addEventListener('mousemove', function(e) {
   console.log(percent);
 });
 
+document.addEventListener('keypress', function(e) {
+  if (e.keyCode === 32) {
+    if (video.paused === true){
+      video.play();
+    } else {
+      video.pause();
+    }
+  }
+  console.log(e.key);
+})
+
 </script>
 </body>
 </html>
